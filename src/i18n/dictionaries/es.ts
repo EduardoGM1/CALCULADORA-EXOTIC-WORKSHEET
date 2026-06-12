@@ -1,0 +1,91 @@
+import type { Dictionary } from "../types"
+
+/** Interfaz en español. Equivalentes al worksheet WS NUEVA VENTA (lado SPA). */
+export const es: Dictionary = {
+  meta: {
+    title: "Calculadora de Membresías | Exotic Travelers",
+    description: "Cotización de producto alineada al worksheet WS NUEVA VENTA ENG - SPA.",
+  },
+  language: {
+    label: "Idioma",
+    es: "Español",
+    en: "English",
+  },
+  header: {
+    title: "Hoja de cálculo",
+    subtitle: "Calculadora de cotización alineada al WS NUEVA VENTA ENG - SPA.",
+    priceListNote:
+      "Lista de Precios Regular (3.1): todos los precios están en USD e incluyen impuestos.",
+  },
+  sections: {
+    membership: { title: "Membresía" },
+    pricing: { title: "Precios" },
+    downPayment: { title: "Enganche" },
+    financing: { title: "Financiamiento" },
+    advanced: { title: "Opciones adicionales" },
+  },
+  fields: {
+    affiliateType: "Nivel de Membresía:",
+    term: "Años:",
+    golf: "Golf:",
+    golfNone: "-",
+    golf5Years: "5 AÑOS",
+    golf10Years: "10 AÑOS",
+    membershipTradeIn: "Intercambio de membresía:",
+    value: "Valor:",
+    basePrice: "Precio Base (USD)",
+    packAmount: "Pack disponible Monto",
+    packPercent: "Pack disponible%",
+    salePrice: "Precio de Venta (USD)",
+    grossPrice: "Precio bruto:",
+    tax: "IMPUESTO",
+    downPayment: "Enganche:",
+    downPaymentPercentSymbol: "%",
+    downPaymentAmountSymbol: "$",
+    downPaymentPercentHint:
+      "Porcentaje del precio de la membresía que se abona como enganche. Define el saldo a financiar.",
+    downPaymentAmountHint:
+      "Monto extra en dólares, además del porcentaje de enganche.",
+    administrationFeeToday: "Cuota administrativa hoy:",
+    downPaymentTodayAdminFee: "Enganche hoy + cuota admin.:",
+    downPaymentTodayAdminFeeHint:
+      "Porcentaje de la membresía que se paga hoy en efectivo. Puede ser distinto al enganche del saldo.",
+    additionalDownPayment: "Enganche adicional:",
+    additionalDownPayment2: "2.º enganche adicional:",
+    additionalDownPayment3: "3.º enganche adicional:",
+    exchangeRate: "TIPO DE CAMBIO APROX.",
+    showMxn: "Mostrar equivalente en MXN",
+    payments: "PAGOS",
+    collectionFee: "Las mensualidades incluyen comisión de cobranza de:",
+    syncPayments: "Sincronizar con plazo",
+    syncDownPaymentToday: "Igualar al enganche %",
+    paymentsHintAuto: "Se calcula automáticamente según el plazo (años × 12).",
+    paymentsHintCustom:
+      "Número de pagos personalizado. Sincroniza con el plazo para usar el cálculo automático.",
+  },
+  termOption: "{{years}} años",
+  downPayment: {
+    downPaymentOnMembership: "Enganche",
+    totalDownPaymentAdminFee: "Total enganche + cuota admin.:",
+    totalPaymentToday: "Pago total hoy (enganche + cuota admin.)",
+  },
+  advanced: {
+    estimatedPayments: "Pagos adicionales estimados",
+    paymentNumber: "#{{index}}",
+  },
+  summary: {
+    title: "Resumen",
+    paymentsTerm: "{{payments}} PAGOS · Plazo {{years}} años",
+    grossPrice: "Precio bruto:",
+    tax: "IMPUESTO",
+    membershipPriceIncludingTax: "Precio de membresía con impuesto:",
+    downPaymentTotal: "Enganche:",
+    administrationFeeToday: "Cuota administrativa hoy:",
+    balance: "SALDO",
+    totalPaymentToday: "Pago total hoy (enganche + cuota admin.)",
+    includesGolf: "Golf",
+    collectionFee: "Las mensualidades incluyen comisión de cobranza de:",
+    monthlyEstimate: "Mensualidad:",
+    monthlyBreakdown: "Capital {{capital}} + cobranza {{collection}}",
+  },
+}
