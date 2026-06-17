@@ -11,12 +11,6 @@ export const en: Dictionary = {
     es: "Español",
     en: "English",
   },
-  header: {
-    title: "WORKSHEET",
-    subtitle: "Product quote calculator aligned with WS NUEVA VENTA ENG - SPA.",
-    priceListNote:
-      "Regular Price List (3.1): all prices are in USD and include taxes.",
-  },
   sections: {
     membership: { title: "Membership" },
     pricing: { title: "Pricing" },

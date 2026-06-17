@@ -62,12 +62,7 @@ export function CalculatorPage() {
 
   return (
     <div className="mx-auto max-w-7xl px-4">
-      <header className="mb-10 flex flex-col gap-4 border-l-4 border-[#143F46] pl-5 sm:flex-row sm:items-start sm:justify-between">
-        <div>
-          <h1 className="mb-1 text-3xl font-bold text-[#143F46]">{dict.header.title}</h1>
-          <p className="max-w-2xl text-[#5B7776]">{dict.header.subtitle}</p>
-          <p className="mt-2 max-w-2xl text-xs text-[#5B7776]">{dict.header.priceListNote}</p>
-        </div>
+      <header className="mb-8 flex justify-end">
         <LanguageSwitcher />
       </header>
 

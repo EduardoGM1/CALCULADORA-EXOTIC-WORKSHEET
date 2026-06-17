@@ -12,11 +12,6 @@ export type Dictionary = {
     es: string
     en: string
   }
-  header: {
-    title: string
-    subtitle: string
-    priceListNote: string
-  }
   sections: {
     membership: { title: string }
     pricing: { title: string }

@@ -11,12 +11,6 @@ export const es: Dictionary = {
     es: "Español",
     en: "English",
   },
-  header: {
-    title: "Hoja de cálculo",
-    subtitle: "Calculadora de cotización alineada al WS NUEVA VENTA ENG - SPA.",
-    priceListNote:
-      "Lista de Precios Regular (3.1): todos los precios están en USD e incluyen impuestos.",
-  },
   sections: {
     membership: { title: "Membresía" },
     pricing: { title: "Precios" },
