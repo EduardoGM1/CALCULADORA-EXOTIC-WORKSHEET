@@ -159,10 +159,12 @@ export function QuoteSummary({
             <MoneyValue usd={quote.golfFee} exchangeRate={exchangeRate} showMxn={showMxn} />
           </div>
         ) : null}
-        <div className="flex justify-between gap-4">
-          <span className="text-[#5B7776]">{dict.summary.collectionFee}</span>
-          <MoneyValue usd={quote.collectionFee} exchangeRate={exchangeRate} showMxn={showMxn} />
-        </div>
+        {quote.balance > 0 ? (
+          <div className="flex justify-between gap-4">
+            <span className="text-[#5B7776]">{dict.summary.collectionFee}</span>
+            <MoneyValue usd={quote.collectionFee} exchangeRate={exchangeRate} showMxn={showMxn} />
+          </div>
+        ) : null}
       </div>
 
       <div className="mt-6 rounded-xl bg-[#143F46] p-5 text-white">
@@ -172,18 +174,26 @@ export function QuoteSummary({
           </div>
           <div className="flex-1">
             <p className="text-sm text-white/75">{dict.summary.monthlyEstimate}</p>
-            <p className="mt-2 text-4xl font-bold">{formatUsd(quote.monthlyWithFee)}</p>
-            {showMxn ? (
-              <p className="mt-1 text-sm text-white/75">
-                {formatMxn(quote.monthlyWithFee, exchangeRate)}
+            {quote.balance > 0 ? (
+              <>
+                <p className="mt-2 text-4xl font-bold">{formatUsd(quote.monthlyWithFee)}</p>
+                {showMxn ? (
+                  <p className="mt-1 text-sm text-white/75">
+                    {formatMxn(quote.monthlyWithFee, exchangeRate)}
+                  </p>
+                ) : null}
+                <p className="mt-3 text-sm text-white/75">
+                  {t(dict.summary.monthlyBreakdown, {
+                    capital: formatUsd(quote.monthlyBase),
+                    collection: formatUsd(quote.collectionFee),
+                  })}
+                </p>
+              </>
+            ) : (
+              <p className="mt-2 text-lg font-medium text-white/90">
+                {dict.summary.noMonthlyPayment}
               </p>
-            ) : null}
-            <p className="mt-3 text-sm text-white/75">
-              {t(dict.summary.monthlyBreakdown, {
-                capital: formatUsd(quote.monthlyBase),
-                collection: formatUsd(quote.collectionFee),
-              })}
-            </p>
+            )}
           </div>
         </div>
       </div>

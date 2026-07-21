@@ -79,5 +79,6 @@ export const en: Dictionary = {
     collectionFee: "Monthly payments include a collection fee of:",
     monthlyEstimate: "Mtly:",
     monthlyBreakdown: "Principal {{capital}} + collection {{collection}}",
+    noMonthlyPayment: "No monthly payment: the balance is fully paid.",
   },
 }

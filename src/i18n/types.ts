@@ -77,5 +77,6 @@ export type Dictionary = {
     collectionFee: string
     monthlyEstimate: string
     monthlyBreakdown: string
+    noMonthlyPayment: string
   }
 }

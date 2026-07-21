@@ -79,5 +79,6 @@ export const es: Dictionary = {
     collectionFee: "Las mensualidades incluyen comisión de cobranza de:",
     monthlyEstimate: "Mensualidad:",
     monthlyBreakdown: "Capital {{capital}} + cobranza {{collection}}",
+    noMonthlyPayment: "Sin mensualidad: el saldo está pagado en su totalidad.",
   },
 }

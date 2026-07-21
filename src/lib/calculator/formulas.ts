@@ -49,8 +49,9 @@ export function calculateQuote(raw: QuoteInput): QuoteResult {
 
   const payments = Math.max(Math.round(raw.payments), 1)
   const collectionFee = clampNonNegative(raw.collectionFee)
-  const monthlyBase = balance > 0 ? balance / payments : 0
-  const monthlyWithFee = balance > 0 ? monthlyBase + collectionFee : 0
+  const hasFinancing = balance > 0
+  const monthlyBase = hasFinancing ? balance / payments : 0
+  const monthlyWithFee = hasFinancing ? monthlyBase + collectionFee : 0
 
   return {
     effectiveGross: grossPrice,
