@@ -22,6 +22,7 @@ export type Dictionary = {
   fields: {
     affiliateType: string
     term: string
+    termSelect: string
     golf: string
     golfNone: string
     golf5Years: string
@@ -66,6 +67,7 @@ export type Dictionary = {
   summary: {
     title: string
     paymentsTerm: string
+    paymentsTermUnset: string
     grossPrice: string
     tax: string
     membershipPriceIncludingTax: string

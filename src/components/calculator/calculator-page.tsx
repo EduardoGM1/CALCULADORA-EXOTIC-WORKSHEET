@@ -85,9 +85,13 @@ export function CalculatorPage() {
 
               <Field label={dict.fields.term}>
                 <SelectControl
-                  value={termYears}
-                  onChange={(event) => setTermYears(Number(event.target.value))}
+                  value={termYears ?? ""}
+                  onChange={(event) => {
+                    const value = event.target.value
+                    setTermYears(value === "" ? null : Number(value))
+                  }}
                 >
+                  <option value="">{dict.fields.termSelect}</option>
                   {availableYears.map((years) => (
                     <option key={years} value={years}>
                       {t(dict.termOption, { years })}

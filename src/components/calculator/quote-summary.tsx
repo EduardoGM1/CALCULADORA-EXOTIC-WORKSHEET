@@ -15,7 +15,7 @@ import type { QuoteResult } from "@/lib/calculator/types"
 type QuoteSummaryProps = {
   membershipName: string
   badgeClass: string
-  termYears: number
+  termYears: number | null
   quote: QuoteResult
   exchangeRate: number
   showMxn: boolean
@@ -110,7 +110,9 @@ export function QuoteSummary({
         </span>
         <h2 className="mt-4 text-xl font-semibold text-[#143F46]">{dict.summary.title}</h2>
         <p className="mt-1 text-sm text-[#5B7776]">
-          {t(dict.summary.paymentsTerm, { payments: quote.payments, years: termYears })}
+          {termYears === null
+            ? t(dict.summary.paymentsTermUnset, { payments: quote.payments })
+            : t(dict.summary.paymentsTerm, { payments: quote.payments, years: termYears })}
         </p>
       </div>
 

@@ -7,6 +7,7 @@ export {
   getYearsForMembership,
   getDefaultPlan,
   resolvePlan,
+  baseOnlyPlan,
 } from "./pricing"
 
 export const DEFAULT_EXCHANGE_RATE = 17.69

@@ -98,3 +98,15 @@ export function getDefaultPlan(membershipName: string): MembershipPlan {
 export function resolvePlan(membershipName: string, years: number): MembershipPlan {
   return findPlan(membershipName, years) ?? getDefaultPlan(membershipName)
 }
+
+/** Precio base de la membresía sin pack (opción "-seleccionar-" en Años). */
+export function baseOnlyPlan(membershipName: string): MembershipPlan {
+  const plan = getDefaultPlan(membershipName)
+  return {
+    years: 0,
+    basePrice: plan.basePrice,
+    packAmount: 0,
+    packPercent: 0,
+    salePrice: plan.basePrice,
+  }
+}

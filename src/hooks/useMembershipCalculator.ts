@@ -7,7 +7,7 @@ import {
   DEFAULT_EXCHANGE_RATE,
   DEFAULT_MEMBERSHIP_NAME,
   DEFAULT_PAYMENTS,
-  DEFAULT_TERM_YEARS,
+  baseOnlyPlan,
   findMembership,
   getYearsForMembership,
   resolvePlan,
@@ -19,13 +19,13 @@ import {
 } from "@/lib/calculator/formulas"
 import type { GolfOption, MembershipPlan } from "@/lib/calculator/types"
 
-const initialPlan = resolvePlan(DEFAULT_MEMBERSHIP_NAME, DEFAULT_TERM_YEARS)
+const initialPlan = baseOnlyPlan(DEFAULT_MEMBERSHIP_NAME)
 
 export function useMembershipCalculator() {
   const [membershipName, setMembershipName] = useState(DEFAULT_MEMBERSHIP_NAME)
-  const [termYears, setTermYears] = useState(DEFAULT_TERM_YEARS)
+  const [termYears, setTermYears] = useState<number | null>(null)
   const [selectedPlan, setSelectedPlan] = useState<MembershipPlan>(initialPlan)
-  const [grossPrice, setGrossPrice] = useState(initialPlan.salePrice)
+  const [grossPrice, setGrossPrice] = useState(initialPlan.basePrice)
   const [tradeInValue, setTradeInValue] = useState(0)
   const [taxRatePercent, setTaxRatePercent] = useState(0)
   const [downPaymentPercent, setDownPaymentPercent] = useState(20)
@@ -59,7 +59,7 @@ export function useMembershipCalculator() {
         adminFee,
         additionalDownPercents,
         golf,
-        termYears,
+        termYears: termYears ?? 0,
         payments,
         exchangeRate,
         collectionFee,
@@ -81,24 +81,39 @@ export function useMembershipCalculator() {
     ]
   )
 
-  function applyPlanPricing(plan: MembershipPlan, membership: string) {
+  function applyPlanPricing(plan: MembershipPlan, membership: string, years: number | null) {
     setMembershipName(membership)
-    setTermYears(plan.years)
+    setTermYears(years)
     setSelectedPlan(plan)
     setGrossPrice(plan.salePrice)
     setDownPaymentAmount((current) => Math.min(current, plan.salePrice))
   }
 
   function selectMembership(name: string) {
+    if (termYears === null) {
+      applyPlanPricing(baseOnlyPlan(name), name, null)
+      return
+    }
+
     const years = getYearsForMembership(name).includes(termYears)
       ? termYears
-      : resolvePlan(name, DEFAULT_TERM_YEARS).years
+      : null
 
-    applyPlanPricing(resolvePlan(name, years), name)
+    if (years === null) {
+      applyPlanPricing(baseOnlyPlan(name), name, null)
+      return
+    }
+
+    applyPlanPricing(resolvePlan(name, years), name, years)
   }
 
-  function updateTermYears(years: number) {
-    applyPlanPricing(resolvePlan(membershipName, years), membershipName)
+  function updateTermYears(years: number | null) {
+    if (years === null) {
+      applyPlanPricing(baseOnlyPlan(membershipName), membershipName, null)
+      return
+    }
+
+    applyPlanPricing(resolvePlan(membershipName, years), membershipName, years)
   }
 
   function updateGrossPrice(value: number) {

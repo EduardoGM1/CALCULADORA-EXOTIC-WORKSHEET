@@ -21,6 +21,7 @@ export const en: Dictionary = {
   fields: {
     affiliateType: "Affiliate type:",
     term: "Term:",
+    termSelect: "-select-",
     golf: "Golf:",
     golfNone: "-",
     golf5Years: "5 YEARS",
@@ -68,6 +69,7 @@ export const en: Dictionary = {
   summary: {
     title: "Quote summary",
     paymentsTerm: "{{payments}} PAYMENTS · Term {{years}} YEARS",
+    paymentsTermUnset: "{{payments}} PAYMENTS",
     grossPrice: "Gross Price:",
     tax: "TAX",
     membershipPriceIncludingTax: "Membership price including tax:",
