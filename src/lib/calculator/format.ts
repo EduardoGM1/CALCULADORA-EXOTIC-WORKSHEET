@@ -15,7 +15,7 @@ export function formatUsd(value: number) {
 }
 
 export function formatMxn(value: number, exchangeRate: number) {
-  return mxnFormatter.format((Number.isFinite(value) ? value : 0) * exchangeRate)
+  return `MXN ${mxnFormatter.format((Number.isFinite(value) ? value : 0) * exchangeRate)}`
 }
 
 export function formatPercent(value: number, digits = 1) {
