@@ -48,11 +48,9 @@ export type Dictionary = {
     exchangeRate: string
     showMxn: string
     payments: string
+    paymentsHint: string
     collectionFee: string
-    syncPayments: string
     syncDownPaymentToday: string
-    paymentsHintAuto: string
-    paymentsHintCustom: string
   }
   termOption: string
   downPayment: {

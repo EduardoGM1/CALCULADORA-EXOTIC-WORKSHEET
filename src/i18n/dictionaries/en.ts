@@ -50,12 +50,9 @@ export const en: Dictionary = {
     exchangeRate: "EXCHANGE RATE APROX.",
     showMxn: "Show MXN equivalent",
     payments: "PAYMENTS",
+    paymentsHint: "Number of installments. Independent from the term in years, as in the worksheet.",
     collectionFee: "Monthly payments include a collection fee of:",
-    syncPayments: "Sync with Term",
     syncDownPaymentToday: "Sync with Down Payment %",
-    paymentsHintAuto: "Calculated automatically from the term (years × 12).",
-    paymentsHintCustom:
-      "Custom number of payments. Sync with Term to restore the automatic calculation.",
   },
   termOption: "{{years}} YEARS",
   downPayment: {

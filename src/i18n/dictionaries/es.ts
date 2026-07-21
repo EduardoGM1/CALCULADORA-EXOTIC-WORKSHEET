@@ -50,12 +50,9 @@ export const es: Dictionary = {
     exchangeRate: "TIPO DE CAMBIO APROX.",
     showMxn: "Mostrar equivalente en MXN",
     payments: "PAGOS",
+    paymentsHint: "Número de mensualidades. Es independiente del plazo en años, como en el worksheet.",
     collectionFee: "Las mensualidades incluyen comisión de cobranza de:",
-    syncPayments: "Sincronizar con plazo",
     syncDownPaymentToday: "Igualar al enganche %",
-    paymentsHintAuto: "Se calcula automáticamente según el plazo (años × 12).",
-    paymentsHintCustom:
-      "Número de pagos personalizado. Sincroniza con el plazo para usar el cálculo automático.",
   },
   termOption: "{{years}} años",
   downPayment: {

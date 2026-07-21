@@ -33,7 +33,6 @@ export function CalculatorPage() {
     golf,
     termYears,
     payments,
-    paymentsTouched,
     exchangeRate,
     collectionFee,
     showMxn,
@@ -53,7 +52,6 @@ export function CalculatorPage() {
     setGolf,
     setTermYears,
     setPayments,
-    syncPaymentsWithTerm,
     setExchangeRate,
     setCollectionFee,
     setShowMxn,
@@ -287,31 +285,13 @@ export function CalculatorPage() {
             <div className="grid gap-5 sm:grid-cols-2">
               <ReadonlyValue label={dict.summary.balance} value={quote.balance} />
 
-              <Field
-                label={dict.fields.payments}
-                hint={
-                  paymentsTouched
-                    ? dict.fields.paymentsHintCustom
-                    : dict.fields.paymentsHintAuto
-                }
-              >
-                <div className="flex gap-2">
-                  <NumberControl
-                    min={1}
-                    max={360}
-                    value={payments}
-                    onChange={(event) => setPayments(Number(event.target.value))}
-                  />
-                  {paymentsTouched ? (
-                    <button
-                      type="button"
-                      onClick={syncPaymentsWithTerm}
-                      className="shrink-0 rounded-lg border border-[#D7E7E2] px-3 text-xs font-semibold text-[#143F46] transition hover:bg-[#EAF4F1]"
-                    >
-                      {dict.fields.syncPayments}
-                    </button>
-                  ) : null}
-                </div>
+              <Field label={dict.fields.payments} hint={dict.fields.paymentsHint}>
+                <NumberControl
+                  min={1}
+                  max={360}
+                  value={payments}
+                  onChange={(event) => setPayments(Number(event.target.value))}
+                />
               </Field>
 
               <Field label={dict.fields.exchangeRate}>

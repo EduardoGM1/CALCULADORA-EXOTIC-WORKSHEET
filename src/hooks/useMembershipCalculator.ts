@@ -6,12 +6,13 @@ import {
   DEFAULT_COLLECTION_FEE,
   DEFAULT_EXCHANGE_RATE,
   DEFAULT_MEMBERSHIP_NAME,
+  DEFAULT_PAYMENTS,
   DEFAULT_TERM_YEARS,
   findMembership,
   getYearsForMembership,
   resolvePlan,
 } from "@/lib/calculator/constants"
-import { calculateQuote, downPercentFromAmount, paymentsFromTerm } from "@/lib/calculator/formulas"
+import { calculateQuote, downPercentFromAmount } from "@/lib/calculator/formulas"
 import type { GolfOption, MembershipPlan } from "@/lib/calculator/types"
 
 const initialPlan = resolvePlan(DEFAULT_MEMBERSHIP_NAME, DEFAULT_TERM_YEARS)
@@ -29,8 +30,7 @@ export function useMembershipCalculator() {
   const [adminFee, setAdminFee] = useState(DEFAULT_ADMIN_FEE)
   const [additionalDownPercents, setAdditionalDownPercents] = useState<[number, number, number]>([0, 0, 0])
   const [golf, setGolf] = useState<GolfOption>("none")
-  const [payments, setPayments] = useState(paymentsFromTerm(DEFAULT_TERM_YEARS))
-  const [paymentsTouched, setPaymentsTouched] = useState(false)
+  const [payments, setPayments] = useState(DEFAULT_PAYMENTS)
   const [exchangeRate, setExchangeRate] = useState(DEFAULT_EXCHANGE_RATE)
   const [collectionFee, setCollectionFee] = useState(DEFAULT_COLLECTION_FEE)
   const [showMxn, setShowMxn] = useState(true)
@@ -77,17 +77,13 @@ export function useMembershipCalculator() {
     ]
   )
 
-  function applyPlan(plan: MembershipPlan, membership: string) {
+  function applyPlanPricing(plan: MembershipPlan, membership: string) {
     setMembershipName(membership)
     setTermYears(plan.years)
     setSelectedPlan(plan)
     setGrossPrice(plan.salePrice)
     setTradeInValue((current) => Math.min(current, plan.salePrice))
     setDownPaymentAmount((current) => Math.min(current, plan.salePrice))
-
-    if (!paymentsTouched) {
-      setPayments(paymentsFromTerm(plan.years))
-    }
   }
 
   function selectMembership(name: string) {
@@ -95,12 +91,11 @@ export function useMembershipCalculator() {
       ? termYears
       : resolvePlan(name, DEFAULT_TERM_YEARS).years
 
-    applyPlan(resolvePlan(name, years), name)
+    applyPlanPricing(resolvePlan(name, years), name)
   }
 
   function updateTermYears(years: number) {
-    const plan = resolvePlan(membershipName, years)
-    applyPlan(plan, membershipName)
+    applyPlanPricing(resolvePlan(membershipName, years), membershipName)
   }
 
   function updateGrossPrice(value: number) {
@@ -108,16 +103,6 @@ export function useMembershipCalculator() {
     setGrossPrice(next)
     setTradeInValue((current) => Math.min(current, next))
     setDownPaymentAmount((current) => Math.min(current, next))
-  }
-
-  function updatePayments(value: number) {
-    setPaymentsTouched(true)
-    setPayments(Math.max(Math.round(value), 1))
-  }
-
-  function syncPaymentsWithTerm() {
-    setPaymentsTouched(false)
-    setPayments(paymentsFromTerm(termYears))
   }
 
   function updateDownPaymentAmount(amount: number) {
@@ -176,7 +161,6 @@ export function useMembershipCalculator() {
     golf,
     termYears,
     payments,
-    paymentsTouched,
     exchangeRate,
     collectionFee,
     showMxn,
@@ -195,8 +179,7 @@ export function useMembershipCalculator() {
     updateAdditionalDownPercent,
     setGolf,
     setTermYears: updateTermYears,
-    setPayments: updatePayments,
-    syncPaymentsWithTerm,
+    setPayments: (value: number) => setPayments(Math.max(Math.round(value), 1)),
     setExchangeRate,
     setCollectionFee,
     setShowMxn,

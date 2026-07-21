@@ -14,10 +14,6 @@ export function getGolfFee(golf: GolfOption): number {
   return GOLF_FEES_USD[golf]
 }
 
-export function paymentsFromTerm(termYears: number) {
-  return Math.max(Math.round(termYears * 12), 1)
-}
-
 /**
  * Replica la lógica financiera del worksheet "WS NUEVA VENTA ENG - SPA".
  * Referencias Excel: E20–E31, C32, H23, fila 33 (collection fee).
