@@ -27,6 +27,7 @@ export const es: Dictionary = {
     golf10Years: "10 AÑOS",
     membershipTradeIn: "Intercambio de membresía:",
     value: "Valor:",
+    valueHint: "Referencia del intercambio. No modifica el saldo ni los cálculos (como en el worksheet).",
     basePrice: "Precio Base (USD)",
     packAmount: "Pack disponible Monto",
     packPercent: "Pack disponible%",

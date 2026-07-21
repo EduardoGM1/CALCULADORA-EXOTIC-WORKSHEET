@@ -20,12 +20,11 @@ export function getGolfFee(golf: GolfOption): number {
  */
 export function calculateQuote(raw: QuoteInput): QuoteResult {
   const grossPrice = clampNonNegative(raw.grossPrice)
-  const tradeInValue = clampNonNegative(raw.tradeInValue)
-  const effectiveGross = Math.max(grossPrice - tradeInValue, 0)
+  // tradeInValue se captura en UI pero no entra en fórmulas del WS (como el Excel).
 
   const taxRate = clampPercent(raw.taxRatePercent) / 100
-  const taxAmount = effectiveGross * taxRate
-  const membershipWithTax = effectiveGross + taxAmount
+  const taxAmount = grossPrice * taxRate
+  const membershipWithTax = grossPrice + taxAmount
 
   const downPaymentPercent = clampPercent(raw.downPaymentPercent) / 100
   const downFromPercent = membershipWithTax * downPaymentPercent
@@ -45,8 +44,8 @@ export function calculateQuote(raw: QuoteInput): QuoteResult {
   const golfFee = getGolfFee(raw.golf)
   const totalPaymentToday = downTodayPlusAdmin + golfFee
 
-  // C32 = E20 - (E23 + E24): saldo sobre precio bruto neto de trade-in
-  const balance = Math.max(effectiveGross - totalDownPayment, 0)
+  // C32 = E20 - (E23 + E24): saldo sobre precio bruto (E20), sin restar trade-in
+  const balance = Math.max(grossPrice - totalDownPayment, 0)
 
   const payments = Math.max(Math.round(raw.payments), 1)
   const collectionFee = clampNonNegative(raw.collectionFee)
@@ -54,7 +53,7 @@ export function calculateQuote(raw: QuoteInput): QuoteResult {
   const monthlyWithFee = balance > 0 ? monthlyBase + collectionFee : 0
 
   return {
-    effectiveGross,
+    effectiveGross: grossPrice,
     taxAmount,
     membershipWithTax,
     downFromPercent,
@@ -77,4 +76,10 @@ export function calculateQuote(raw: QuoteInput): QuoteResult {
 export function downPercentFromAmount(amount: number, membershipWithTax: number) {
   if (membershipWithTax <= 0) return 0
   return clampPercent((amount / membershipWithTax) * 100)
+}
+
+export function membershipWithTaxFrom(grossPrice: number, taxRatePercent: number) {
+  const gross = clampNonNegative(grossPrice)
+  const taxRate = clampPercent(taxRatePercent) / 100
+  return gross * (1 + taxRate)
 }

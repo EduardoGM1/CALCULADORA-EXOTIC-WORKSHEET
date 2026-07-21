@@ -28,6 +28,7 @@ export type Dictionary = {
     golf10Years: string
     membershipTradeIn: string
     value: string
+    valueHint: string
     basePrice: string
     packAmount: string
     packPercent: string

@@ -12,7 +12,11 @@ import {
   getYearsForMembership,
   resolvePlan,
 } from "@/lib/calculator/constants"
-import { calculateQuote, downPercentFromAmount } from "@/lib/calculator/formulas"
+import {
+  calculateQuote,
+  downPercentFromAmount,
+  membershipWithTaxFrom,
+} from "@/lib/calculator/formulas"
 import type { GolfOption, MembershipPlan } from "@/lib/calculator/types"
 
 const initialPlan = resolvePlan(DEFAULT_MEMBERSHIP_NAME, DEFAULT_TERM_YEARS)
@@ -82,7 +86,6 @@ export function useMembershipCalculator() {
     setTermYears(plan.years)
     setSelectedPlan(plan)
     setGrossPrice(plan.salePrice)
-    setTradeInValue((current) => Math.min(current, plan.salePrice))
     setDownPaymentAmount((current) => Math.min(current, plan.salePrice))
   }
 
@@ -101,7 +104,6 @@ export function useMembershipCalculator() {
   function updateGrossPrice(value: number) {
     const next = Math.max(value, 0)
     setGrossPrice(next)
-    setTradeInValue((current) => Math.min(current, next))
     setDownPaymentAmount((current) => Math.min(current, next))
   }
 
@@ -109,9 +111,7 @@ export function useMembershipCalculator() {
     const safe = Math.max(amount, 0)
     setDownPaymentAmount(safe)
 
-    const effectiveGross = Math.max(grossPrice - tradeInValue, 0)
-    const membershipWithTax = effectiveGross * (1 + Math.min(Math.max(taxRatePercent, 0), 100) / 100)
-
+    const membershipWithTax = membershipWithTaxFrom(grossPrice, taxRatePercent)
     if (membershipWithTax > 0) {
       setDownPaymentPercent(downPercentFromAmount(safe, membershipWithTax))
     }

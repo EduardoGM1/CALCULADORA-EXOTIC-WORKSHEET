@@ -109,17 +109,14 @@ export function CalculatorPage() {
                 </SelectControl>
               </Field>
 
-              <Field label={dict.fields.value}>
+              <Field label={dict.fields.value} hint={dict.fields.valueHint}>
                 <NumberControl
                   prefix="$"
                   min={0}
-                  max={grossPrice}
                   step={100}
                   value={tradeInValue}
                   onChange={(event) =>
-                    setTradeInValue(
-                      Math.min(Math.max(Number(event.target.value), 0), grossPrice)
-                    )
+                    setTradeInValue(Math.max(Number(event.target.value), 0))
                   }
                 />
               </Field>

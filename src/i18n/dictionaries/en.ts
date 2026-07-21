@@ -27,6 +27,7 @@ export const en: Dictionary = {
     golf10Years: "10 YEARS",
     membershipTradeIn: "Membership trade in:",
     value: "Value:",
+    valueHint: "Trade-in reference only. Does not affect balance or calculations (same as the worksheet).",
     basePrice: "Base Price (USD)",
     packAmount: "Available Pack Amount",
     packPercent: "Available Pack %",
